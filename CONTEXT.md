@@ -25,7 +25,8 @@
 
 ## Gap ledger (dedupe — READ FIRST, never re-pick)
 one bullet per attempt:
-- `2026-09-08` self-found trivial-errors cleanup (typos + broken link + stale command) — status: pr-opened — see note below
+one bullet per attempt:
+- `2026-09-08` self-found trivial-errors cleanup (6 fixes, 6 files: CONTRIBUTING dead link, satifactory typo, get-cdp-infrastructure-stack stale command, existance/relavent/it's typos) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/3 — fork CI red on main too (env: mypy/yaml-stubs py3.11, av wheel build); locally verified 66 tests pass
 
 ## Mined gaps (discovered, not yet attempted)
 one bullet per candidate:
