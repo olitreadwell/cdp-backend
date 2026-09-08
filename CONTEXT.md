@@ -27,6 +27,7 @@
 one bullet per attempt:
 one bullet per attempt:
 - `2026-09-08` self-found trivial-errors cleanup (6 fixes, 6 files: CONTRIBUTING dead link, satifactory typo, get-cdp-infrastructure-stack stale command, existance/relavent/it's typos) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/3 — fork CI red on main too (env: mypy/yaml-stubs py3.11, av wheel build); locally verified 66 tests pass
+- `2026-09-09` EXTENDED PR #3 (same theme, not a new PR): added 5 more typo fixes across 4 files (infered->inferred x2 in pipeline_config.py user-facing error; retrive->retrieve file_utils.py; commited->committed speaker_labels.py; cant->can't + coonvert->convert event_gather_pipeline.py) — pr-updated https://github.com/olitreadwell/cdp-backend/pull/3 — combined 10 files, 11/11, head bb73927a, mergeable=True; skipped valid variants (unsecure, re-use) and test-fixture strings (doesnt://matter, doesnt.matter)
 
 ## Mined gaps (discovered, not yet attempted)
 one bullet per candidate:
@@ -36,3 +37,7 @@ one bullet per candidate:
 - `2026-09-08` cdp_backend/database/validators.py docstring typo "existance" -> "existence"
 - `2026-09-08` cdp_backend/pipeline/ingestion_models.py docstring typo "relavent" -> "relevant"
 - `2026-09-08` cdp_backend/pipeline/transcript_model.py docstring "it's respective transcript" -> "its respective transcript"
+- `2026-09-09` cdp_backend/pipeline/pipeline_config.py error message "infered" -> "inferred" (2x) — done in PR #3
+- `2026-09-09` cdp_backend/utils/file_utils.py docstring "retrive" -> "retrieve" — done in PR #3
+- `2026-09-09` cdp_backend/annotation/speaker_labels.py docstring "commited" -> "committed" — done in PR #3
+- `2026-09-09` cdp_backend/pipeline/event_gather_pipeline.py comment "cant"/"coonvert" -> "can't"/"convert" — done in PR #3
