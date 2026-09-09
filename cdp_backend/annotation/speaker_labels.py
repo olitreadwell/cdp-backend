@@ -58,7 +58,7 @@ def annotate(  # noqa: C901
         Default: 2 seconds
     min_sentence_mean_confidence: float
         The minimum allowable mean confidence of all predicted chunk confidences
-        to determine if the predicted label should be commited as an annotation
+        to determine if the predicted label should be committed as an annotation
         or not.
         Default: 0.985
 
