@@ -125,7 +125,7 @@ class Sentence(DataClassJsonMixin):
     Parameters
     ----------
     index: int
-        The index of the sentence in it's respective transcript.
+        The index of the sentence in its respective transcript.
     confidence: float
         A number between 0 and 1 for the confidence of the sentence accuracy.
     start_time: float
