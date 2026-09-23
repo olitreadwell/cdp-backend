@@ -18,6 +18,7 @@ from cdp_backend.utils import file_utils
 from cdp_backend.utils.file_utils import (
     MAX_THUMBNAIL_HEIGHT,
     MAX_THUMBNAIL_WIDTH,
+    find_proper_resize_ratio,
     parse_document,
     resource_copy,
 )
@@ -111,6 +112,33 @@ def test_rename_append_to_stem(path: Path, addition: str, expected_result: str) 
 def test_get_media_type(uri: str, expected_result: str | None) -> None:
     actual_result = file_utils.get_media_type(uri)
     assert actual_result == expected_result
+
+
+@pytest.mark.parametrize(
+    "height, width, expected_ratio",
+    [
+        (540, 960, 2),
+        (300, 400, 2),
+        (800, 1200, 540 / 800),
+        (1000, 2000, 960 / 2000),
+        (500, 2000, 960 / 2000),
+        (1920, 1080, 540 / 1920),
+    ],
+)
+def test_find_proper_resize_ratio(
+    height: int,
+    width: int,
+    expected_ratio: float,
+) -> None:
+    actual_ratio = find_proper_resize_ratio(height, width)
+    assert actual_ratio == pytest.approx(expected_ratio)
+
+    # When a resize is needed, both scaled dimensions stay within the max bounds.
+    scaled_height = height * actual_ratio
+    scaled_width = width * actual_ratio
+    if expected_ratio != 2:
+        assert scaled_height <= MAX_THUMBNAIL_HEIGHT
+        assert scaled_width <= MAX_THUMBNAIL_WIDTH
 
 
 # Type ignore because changing tmpdir typing

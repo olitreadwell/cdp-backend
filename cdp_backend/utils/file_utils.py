@@ -558,12 +558,9 @@ def find_proper_resize_ratio(height: int, width: int) -> float:
         height_ratio = MAX_THUMBNAIL_HEIGHT / height
         width_ratio = MAX_THUMBNAIL_WIDTH / width
 
-        if height_ratio > width_ratio:
-            final_ratio = height_ratio
-        else:
-            final_ratio = width_ratio
-
-        return final_ratio
+        # Use the smaller ratio so the resized image stays within both the
+        # max height and the max width.
+        return min(height_ratio, width_ratio)
 
     return 2
 
