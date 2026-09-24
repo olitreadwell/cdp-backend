@@ -3,6 +3,7 @@
 import logging
 import re
 import string
+from urllib.parse import unquote
 
 ###############################################################################
 
@@ -139,7 +140,9 @@ def convert_gcs_json_url_to_gsutil_form(url: str) -> str:
 
     filename = re.search(r"/o/(.+?)\?alt=media", url)
     if filename:
-        found_filename = str(filename.group(1))
+        # GCS JSON API download URLs percent-encode the object name (spaces
+        # become %20, "/" become %2F, etc.). gsutil needs the decoded name.
+        found_filename = unquote(str(filename.group(1)))
 
     if found_bucket and found_filename:
         return f"gs://{found_bucket}/{found_filename}"

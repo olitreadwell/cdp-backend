@@ -97,6 +97,23 @@ def test_clean_text(
             + "bucket.appspot.com/o/wombo_combo.mp4?alt=media",
             "gs://bucket.appspot.com/wombo_combo.mp4",
         ),
+        # GCS JSON API download URLs percent-encode the object name; the
+        # gsutil form needs the decoded object name.
+        (
+            "https://storage.googleapis.com/download/storage/v1/b/mybucket/o/"
+            + "meeting%20agenda.pdf?alt=media",
+            "gs://mybucket/meeting agenda.pdf",
+        ),
+        (
+            "https://storage.googleapis.com/download/storage/v1/b/mybucket/o/"
+            + "minutes%2F2023%2Freport.pdf?alt=media",
+            "gs://mybucket/minutes/2023/report.pdf",
+        ),
+        (
+            "https://storage.googleapis.com/download/storage/v1/b/mybucket/o/"
+            + "report%281%29.pdf?alt=media",
+            "gs://mybucket/report(1).pdf",
+        ),
         # Invalid format
         (
             "https://storage.googleapis.com/download/storage/"
