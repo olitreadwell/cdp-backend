@@ -25,7 +25,6 @@
 
 ## Gap ledger (dedupe — READ FIRST, never re-pick)
 one bullet per attempt:
-one bullet per attempt:
 - `2026-09-08` self-found trivial-errors cleanup (6 fixes, 6 files: CONTRIBUTING dead link, satifactory typo, get-cdp-infrastructure-stack stale command, existance/relavent/it's typos) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/3 — fork CI red on main too (env: mypy/yaml-stubs py3.11, av wheel build); locally verified 66 tests pass
 - `2026-09-09` EXTENDED PR #3 (same theme, not a new PR): added 5 more typo fixes across 4 files (infered->inferred x2 in pipeline_config.py user-facing error; retrive->retrieve file_utils.py; commited->committed speaker_labels.py; cant->can't + coonvert->convert event_gather_pipeline.py) — pr-updated https://github.com/olitreadwell/cdp-backend/pull/3 — combined 10 files, 11/11, head bb73927a, mergeable=True; skipped valid variants (unsecure, re-use) and test-fixture strings (doesnt://matter, doesnt.matter)
 - `2026-09-24` self-found bug fix find_proper_resize_ratio (returns max of scale factors so non-16:9 thumbnails stay oversized) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/4 — fork CI red on main too (env: mypy/yaml-stubs, av wheel build); locally verified new test passes (6 cases) + ruff/black clean
