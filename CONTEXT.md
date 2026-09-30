@@ -1,5 +1,5 @@
 # CouncilDataProject/cdp-backend context
-> refreshed 2026-09-08 | upstream default: main @ fda26250d66a076a05772dda2f9a109d34ac6a03
+> refreshed 2026-09-30 | upstream default: main @ fda26250d66a076a05772dda2f9a109d34ac6a03
 
 ## Identity & policies
 - upstream: CouncilDataProject/cdp-backend, default branch main, primary language Python, English-first: yes (all docs in English)
@@ -22,6 +22,7 @@
 ## Issue-area health
 - repo inactive for new development; low volume of open issues/PRs
 - fork PRs should be tiny, low-risk, easy-to-scan (consistent with trivial/minor-fix pass)
+- dedupe (2026-09-30): no upstream issue or PR mentions `get_media_type`; the only `media type` hit is #235/#138 (hosting/resource-copy), unrelated. PR #247 (time_duration_is_valid regex) was an automated bot PR self-closed as incorrect, not maintainer-engaged
 
 ## Gap ledger (dedupe — READ FIRST, never re-pick)
 one bullet per attempt:
@@ -30,6 +31,8 @@ one bullet per attempt:
 - `2026-09-24` self-found bug fix find_proper_resize_ratio (returns max of scale factors so non-16:9 thumbnails stay oversized) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/4 — fork CI red on main too (env: mypy/yaml-stubs, av wheel build); locally verified new test passes (6 cases) + ruff/black clean
 - `2026-09-24` self-found bug fix convert_gcs_json_url_to_gsutil_form (percent-encoded GCS object names not decoded -> wrong gsutil URI -> resource_exists reports valid resources missing) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/5 — 3 new parametrized cases fail pre-fix, pass post-fix; ruff+black pass; mypy/av-wheel are pre-existing fork-main env failures
 - `2026-09-24` self-found bug fix resource_copy default dst filename kept query string/fragment (uri.split("/")[-1]) -> wrote files literally named example_video.mp4?token=abc&alt=media; new _uri_derived_filename() strips ?.../#..., used in no-dst + directory-dst branches; 4 parametrized cases pass — pr-opened https://github.com/olitreadwell/cdp-backend/pull/6 — black+py_compile clean; mypy/av-wheel pre-existing fork-main env failures
+
+- `2026-09-30` self-found bug fix get_media_type (`uri.split(".")[-1]` corrupts the suffix, so query strings/fragments/uppercase extensions never match the IANA name column and the function returns None) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/7 — 5 new parametrized cases fail pre-fix, pass post-fix; black+ruff+py_compile clean; fork CI red on main too (env: mypy/yaml-stubs py3.11, av wheel build)
 
 ## Mined gaps (discovered, not yet attempted)
 one bullet per candidate:
@@ -45,3 +48,7 @@ one bullet per candidate:
 - `2026-09-09` cdp_backend/utils/file_utils.py docstring "retrive" -> "retrieve" — done in PR #3
 - `2026-09-09` cdp_backend/annotation/speaker_labels.py docstring "commited" -> "committed" — done in PR #3
 - `2026-09-09` cdp_backend/pipeline/event_gather_pipeline.py comment "cant"/"coonvert" -> "can't"/"convert" — done in PR #3
+- `2026-09-30` cdp_backend/utils/file_utils.py get_media_type returns None for URIs with a query string/fragment or uppercase extension (suffix taken from `uri.split(".")[-1]`) — done in PR #7
+- `2026-09-30` cdp_backend/database/models.py generate_router_string raises IndexError (`spaces_replaced[-1]`) for a name that cleans to empty (e.g. "李雷"), instead of a clear error — status: proposed
+- `2026-09-30` cdp_backend/pipeline/event_gather_pipeline.py convert_video_and_handle_host can leave `hosted_video_media_url` unbound (UnboundLocalError) when a secure video URI fails resource_exists and its www variant does not exist either — status: proposed
+
