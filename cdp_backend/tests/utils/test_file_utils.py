@@ -99,12 +99,23 @@ def test_rename_append_to_stem(path: Path, addition: str, expected_result: str) 
         ("https://some.site.co/image.png", "image/png"),
         ("https://some.site.co/image.tiff", "image/tiff"),
         ("https://some.site.co/report.pdf", "application/pdf"),
+        (
+            "https://some.site.co/report.pdf?version=2&token=abc",
+            "application/pdf",
+        ),
+        ("https://some.site.co/IMAGE.PNG", "image/png"),
+        ("https://some.site.co/image.png#page=3", "image/png"),
         ("https://some.site.co/image.unknownformat", None),
         ("file:///some/dir/index.html", "text/html"),
         ("file:///some/dir/data.json", "application/json"),
+        ("file:///some/dir/data.json?alt=media", "application/json"),
         ("file:///some/dir/image.png", "image/png"),
         ("file:///some/dir/image.tiff", "image/tiff"),
         ("file:///some/dir/report.pdf", "application/pdf"),
+        (
+            "gs://cdp-example/central-staff-memo.pdf?alt=media",
+            "application/pdf",
+        ),
         ("file:///some/dir/image.unknownformat", None),
     ],
 )

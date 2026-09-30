@@ -12,6 +12,7 @@ import xml.dom.minidom
 import zipfile
 from hashlib import sha256
 from pathlib import Path
+from urllib.parse import urlparse
 from uuid import uuid4
 
 import fireo
@@ -130,9 +131,14 @@ def get_media_type(uri: str) -> str | None:
         str(Path(__file__).parent / "resources" / "content-types-*.csv")
     )
 
-    # Get suffix from URI
-    splits = uri.split(".")
-    suffix = splits[-1]
+    # Isolate the URI path so that query strings and fragments
+    # (e.g. "https://some.site.co/report.pdf?version=2") don't corrupt the
+    # file extension
+    path = urlparse(uri).path
+
+    # Get suffix from URI, lowercased as file extensions are case insensitive
+    # (e.g. "https://some.site.co/IMAGE.PNG")
+    suffix = Path(path).suffix.lstrip(".").lower()
 
     # Find content type
     matching = media_types[media_types["Name"] == suffix].compute()
