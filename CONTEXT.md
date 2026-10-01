@@ -1,5 +1,5 @@
 # CouncilDataProject/cdp-backend context
-> refreshed 2026-09-30 | upstream default: main @ fda26250d66a076a05772dda2f9a109d34ac6a03
+> refreshed 2026-10-01 | upstream default: main @ fda26250d66a076a05772dda2f9a109d34ac6a03
 
 ## Identity & policies
 - upstream: CouncilDataProject/cdp-backend, default branch main, primary language Python, English-first: yes (all docs in English)
@@ -33,6 +33,7 @@ one bullet per attempt:
 - `2026-09-24` self-found bug fix resource_copy default dst filename kept query string/fragment (uri.split("/")[-1]) -> wrote files literally named example_video.mp4?token=abc&alt=media; new _uri_derived_filename() strips ?.../#..., used in no-dst + directory-dst branches; 4 parametrized cases pass — pr-opened https://github.com/olitreadwell/cdp-backend/pull/6 — black+py_compile clean; mypy/av-wheel pre-existing fork-main env failures
 
 - `2026-09-30` self-found bug fix get_media_type (`uri.split(".")[-1]` corrupts the suffix, so query strings/fragments/uppercase extensions never match the IANA name column and the function returns None) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/7 — 5 new parametrized cases fail pre-fix, pass post-fix; black+ruff+py_compile clean; fork CI red on main too (env: mypy/yaml-stubs py3.11, av wheel build)
+- `2026-10-01` self-found trivial-errors cleanup, pass 2 (8 fixes, 7 files: README CI badge 404 -> actions/workflows/ci.yml badge path; CONTRIBUTING Just Commands list `test` -> `test-functions`+`test-library`; gcloud-functions README `--target hello_http` -> `generate_clip`; comment typos divison/accesible x3/guarentee) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/8 — locally: 8 tests pass in test_pipeline_config.py, black 22.6.0 + ruff 0.0.216 clean, py_compile clean; fork CI red on main too (mypy/yaml-stubs py3.11, av wheel build)
 
 ## Mined gaps (discovered, not yet attempted)
 one bullet per candidate:
@@ -51,4 +52,7 @@ one bullet per candidate:
 - `2026-09-30` cdp_backend/utils/file_utils.py get_media_type returns None for URIs with a query string/fragment or uppercase extension (suffix taken from `uri.split(".")[-1]`) — done in PR #7
 - `2026-09-30` cdp_backend/database/models.py generate_router_string raises IndexError (`spaces_replaced[-1]`) for a name that cleans to empty (e.g. "李雷"), instead of a clear error — status: proposed
 - `2026-09-30` cdp_backend/pipeline/event_gather_pipeline.py convert_video_and_handle_host can leave `hosted_video_media_url` unbound (UnboundLocalError) when a secure video URI fails resource_exists and its www variant does not exist either — status: proposed
-
+- `2026-10-01` README.md CI status badge URL `workflows/CI/badge.svg` 404s (verified); use `actions/workflows/ci.yml/badge.svg` — done in PR #8
+- `2026-10-01` CONTRIBUTING.md "Just Commands" list documents a `test` recipe that does not exist in the Justfile; actual recipes are `test-library` + `test-functions` — done in PR #8
+- `2026-10-01` cdp_backend/infrastructure/gcloud-functions/README.md debug command uses `--target hello_http` but the function is `generate_clip` — done in PR #8
+- `2026-10-01` comment typos: generate_event_index_pipeline.py "divison"; test_event_gather_pipeline.py/test_event_index_pipeline.py/test_pipeline_config.py "accesible"; test_event_gather_pipeline.py "guarentee" — done in PR #8
