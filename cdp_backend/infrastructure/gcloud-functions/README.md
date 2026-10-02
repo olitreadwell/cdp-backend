@@ -2,7 +2,7 @@
 
 ## Local / Debug
 
-`functions-framework --target hello_http --debug`
+`functions-framework --target generate_clip --debug`
 
 ## Production
 

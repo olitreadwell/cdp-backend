@@ -16,7 +16,7 @@ from cdp_backend.pipeline.pipeline_config import (
 #############################################################################
 
 # NOTE:
-# unittest mock patches are accesible in reverse order in params
+# unittest mock patches are accessible in reverse order in params
 # i.e. if we did the following patches
 # @patch(module.func_a)
 # @patch(module.func_b)

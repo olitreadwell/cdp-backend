@@ -32,7 +32,7 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/CouncilDataProject/cdp-backend
+    $ git clone https://github.com/CouncilDataProject/cdp-backend
 
 Or download the `tarball`_:
 

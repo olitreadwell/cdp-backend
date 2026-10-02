@@ -386,7 +386,7 @@ def convert_video_and_handle_host(  # noqa: C901
         video_filepath = str(trimmed_filepath)
 
     # Check if original session video uri is a m3u8
-    # We cant follow the normal coonvert video process from above
+    # We can't follow the normal convert video process from above
     # because the m3u8 looks to the URI for all the chunks
     elif session.video_uri.endswith(".m3u8"):
         cdp_will_host = True

@@ -671,7 +671,7 @@ def download_video_from_session_id(
         The path to the Google Service Account credentials JSON file used
         to initialize the file store connection.
     session_id: str
-        The id of the session to retrive the video for.
+        The id of the session to retrieve the video for.
     dest: Optional[Union[str, Path]]
         A destination to store the file to.
         This is passed directly to the resource_copy function.
