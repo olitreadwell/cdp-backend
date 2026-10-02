@@ -1,6 +1,6 @@
 # cdp-backend
 
-[![Build Status](https://github.com/CouncilDataProject/cdp-backend/workflows/CI/badge.svg)](https://github.com/CouncilDataProject/cdp-backend/actions)
+[![Build Status](https://github.com/CouncilDataProject/cdp-backend/actions/workflows/ci.yml/badge.svg)](https://github.com/CouncilDataProject/cdp-backend/actions)
 [![Documentation](https://github.com/CouncilDataProject/cdp-backend/workflows/Documentation/badge.svg)](https://CouncilDataProject.github.io/cdp-backend)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.03904/status.svg)](https://doi.org/10.21105/joss.03904)
 

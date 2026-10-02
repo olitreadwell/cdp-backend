@@ -336,7 +336,7 @@ def compute_tfidf(
     utcnow = pytz.timezone("UTC").localize(utcnow)
     n_grams["datetime_weighted_tfidf"] = n_grams.apply(
         # Unit of decay is in months (`/ 30`)
-        # `+ 2` protects against divison by zero
+        # `+ 2` protects against division by zero
         lambda row: row.tfidf
         / math.log(
             ((utcnow - row.event_datetime).days / datetime_weighting_days_decay) + 2
