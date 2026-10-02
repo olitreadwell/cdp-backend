@@ -114,7 +114,7 @@ The actual infrastructure files live in the `cdp_backend/infrastructure` module.
 To make changes to the infrastructure stack, change the files in that module and then
 rerun `get-cdp-infrastructure-stack`.
 
-Note: the database indexes are store in the `cdp_backend/database/models.py` module
+Note: the database indexes are stored in the `cdp_backend/database/models.py` module
 with each collection model.
 
 ## Google Cloud Functions

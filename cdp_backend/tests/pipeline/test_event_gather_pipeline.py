@@ -230,7 +230,7 @@ passed_events_minutes_item = ingestion_models.EventMinutesItem(
     "vote, event_minutes_item, expected",
     [
         # The minutes item passed
-        # They approved or approved-by-abstention-or-absense
+        # They approved or approved-by-abstention-or-absence
         (
             ingestion_models.Vote(
                 person=example_person,
@@ -255,7 +255,7 @@ passed_events_minutes_item = ingestion_models.EventMinutesItem(
             passed_events_minutes_item,
             True,
         ),
-        # They rejected or rejected-by-abstention-or-absense
+        # They rejected or rejected-by-abstention-or-absence
         (
             ingestion_models.Vote(
                 person=example_person,
@@ -281,7 +281,7 @@ passed_events_minutes_item = ingestion_models.EventMinutesItem(
             False,
         ),
         # The minutes item failed
-        # They approved or approved-by-abstention-or-absense
+        # They approved or approved-by-abstention-or-absence
         (
             ingestion_models.Vote(
                 person=example_person,
@@ -306,7 +306,7 @@ passed_events_minutes_item = ingestion_models.EventMinutesItem(
             failed_events_minutes_item,
             False,
         ),
-        # They rejected or rejected-by-abstention-or-absense
+        # They rejected or rejected-by-abstention-or-absence
         (
             ingestion_models.Vote(
                 person=example_person,
