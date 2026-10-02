@@ -1,5 +1,5 @@
 # CouncilDataProject/cdp-backend context
-> refreshed 2026-10-01 | upstream default: main @ fda26250d66a076a05772dda2f9a109d34ac6a03
+> refreshed 2026-10-02 | upstream default: main @ fda26250d66a076a05772dda2f9a109d34ac6a03
 
 ## Identity & policies
 - upstream: CouncilDataProject/cdp-backend, default branch main, primary language Python, English-first: yes (all docs in English)
@@ -34,6 +34,7 @@ one bullet per attempt:
 
 - `2026-09-30` self-found bug fix get_media_type (`uri.split(".")[-1]` corrupts the suffix, so query strings/fragments/uppercase extensions never match the IANA name column and the function returns None) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/7 — 5 new parametrized cases fail pre-fix, pass post-fix; black+ruff+py_compile clean; fork CI red on main too (env: mypy/yaml-stubs py3.11, av wheel build)
 - `2026-10-01` self-found trivial-errors cleanup, pass 2 (8 fixes, 7 files: README CI badge 404 -> actions/workflows/ci.yml badge path; CONTRIBUTING Just Commands list `test` -> `test-functions`+`test-library`; gcloud-functions README `--target hello_http` -> `generate_clip`; comment typos divison/accesible x3/guarentee) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/8 — locally: 8 tests pass in test_pipeline_config.py, black 22.6.0 + ruff 0.0.216 clean, py_compile clean; fork CI red on main too (mypy/yaml-stubs py3.11, av wheel build)
+- `2026-10-02` self-found trivial-errors cleanup, pass 3 (7 fixes, 5 files: comment typos `absense`->`absence` x4 in test_event_gather_pipeline.py; comment `GCSFilSystem`->`GCSFileSystem` in add_content_hash_to_sessions.py; docstrings `it's respective`->`its respective` + `list of word`->`list of words` in transcript_model.py; dev-infrastructure README `are store in`->`are stored in`; docs/installation.rst clone via removed `git://` protocol (ls-remote exits 128) -> `https://`) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/9 — locally: test_transcript_model.py passes, py_compile + black 22.6.0 + ruff 0.0.216 clean; 3-way merge with open PR #8 verified clean; fork CI red on main too (mypy/yaml-stubs py3.11, av wheel build)
 
 ## Mined gaps (discovered, not yet attempted)
 one bullet per candidate:
@@ -56,3 +57,5 @@ one bullet per candidate:
 - `2026-10-01` CONTRIBUTING.md "Just Commands" list documents a `test` recipe that does not exist in the Justfile; actual recipes are `test-library` + `test-functions` — done in PR #8
 - `2026-10-01` cdp_backend/infrastructure/gcloud-functions/README.md debug command uses `--target hello_http` but the function is `generate_clip` — done in PR #8
 - `2026-10-01` comment typos: generate_event_index_pipeline.py "divison"; test_event_gather_pipeline.py/test_event_index_pipeline.py/test_pipeline_config.py "accesible"; test_event_gather_pipeline.py "guarentee" — done in PR #8
+- `2026-10-02` docs/installation.rst clone command uses the removed `git://` protocol (dead; `git ls-remote git://github.com/CouncilDataProject/cdp-backend` exits 128) — done in PR #9
+- `2026-10-02` typos: test_event_gather_pipeline.py comments "absense" x4; add_content_hash_to_sessions.py "GCSFilSystem"; transcript_model.py "it's respective"/"list of word"; dev-infrastructure/README.md "are store in" — done in PR #9
