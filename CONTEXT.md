@@ -1,5 +1,5 @@
 # CouncilDataProject/cdp-backend context
-> refreshed 2026-10-02 | upstream default: main @ fda26250d66a076a05772dda2f9a109d34ac6a03
+> refreshed 2026-10-03 | upstream default: main @ fda26250d66a076a05772dda2f9a109d34ac6a03
 
 ## Identity & policies
 - upstream: CouncilDataProject/cdp-backend, default branch main, primary language Python, English-first: yes (all docs in English)
@@ -35,6 +35,7 @@ one bullet per attempt:
 - `2026-09-30` self-found bug fix get_media_type (`uri.split(".")[-1]` corrupts the suffix, so query strings/fragments/uppercase extensions never match the IANA name column and the function returns None) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/7 — 5 new parametrized cases fail pre-fix, pass post-fix; black+ruff+py_compile clean; fork CI red on main too (env: mypy/yaml-stubs py3.11, av wheel build)
 - `2026-10-01` self-found trivial-errors cleanup, pass 2 (8 fixes, 7 files: README CI badge 404 -> actions/workflows/ci.yml badge path; CONTRIBUTING Just Commands list `test` -> `test-functions`+`test-library`; gcloud-functions README `--target hello_http` -> `generate_clip`; comment typos divison/accesible x3/guarentee) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/8 — locally: 8 tests pass in test_pipeline_config.py, black 22.6.0 + ruff 0.0.216 clean, py_compile clean; fork CI red on main too (mypy/yaml-stubs py3.11, av wheel build)
 - `2026-10-02` self-found trivial-errors cleanup, pass 3 (7 fixes, 5 files: comment typos `absense`->`absence` x4 in test_event_gather_pipeline.py; comment `GCSFilSystem`->`GCSFileSystem` in add_content_hash_to_sessions.py; docstrings `it's respective`->`its respective` + `list of word`->`list of words` in transcript_model.py; dev-infrastructure README `are store in`->`are stored in`; docs/installation.rst clone via removed `git://` protocol (ls-remote exits 128) -> `https://`) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/9 — locally: test_transcript_model.py passes, py_compile + black 22.6.0 + ruff 0.0.216 clean; 3-way merge with open PR #8 verified clean; fork CI red on main too (mypy/yaml-stubs py3.11, av wheel build)
+- `2026-10-03` self-found bug fix convert_video_and_handle_host (secure session video URI whose resource_exists check and www variant both fail left `hosted_video_media_url` unbound -> UnboundLocalError on the `Verified video URL` log line / return; now defaults to the provided session URI and is still overridden when a better host is found) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/10 — new test fails pre-fix (UnboundLocalError) and passes post-fix; test_event_gather_pipeline.py 40 passed; black 22.6.0 + ruff 0.0.216 clean; fork CI red on main too (mypy/yaml-stubs py3.11, av wheel build)
 
 ## Mined gaps (discovered, not yet attempted)
 one bullet per candidate:
@@ -52,7 +53,7 @@ one bullet per candidate:
 - `2026-09-09` cdp_backend/pipeline/event_gather_pipeline.py comment "cant"/"coonvert" -> "can't"/"convert" — done in PR #3
 - `2026-09-30` cdp_backend/utils/file_utils.py get_media_type returns None for URIs with a query string/fragment or uppercase extension (suffix taken from `uri.split(".")[-1]`) — done in PR #7
 - `2026-09-30` cdp_backend/database/models.py generate_router_string raises IndexError (`spaces_replaced[-1]`) for a name that cleans to empty (e.g. "李雷"), instead of a clear error — status: proposed
-- `2026-09-30` cdp_backend/pipeline/event_gather_pipeline.py convert_video_and_handle_host can leave `hosted_video_media_url` unbound (UnboundLocalError) when a secure video URI fails resource_exists and its www variant does not exist either — status: proposed
+- `2026-09-30` cdp_backend/pipeline/event_gather_pipeline.py convert_video_and_handle_host can leave `hosted_video_media_url` unbound (UnboundLocalError) when a secure video URI fails resource_exists and its www variant does not exist either — done in PR #10
 - `2026-10-01` README.md CI status badge URL `workflows/CI/badge.svg` 404s (verified); use `actions/workflows/ci.yml/badge.svg` — done in PR #8
 - `2026-10-01` CONTRIBUTING.md "Just Commands" list documents a `test` recipe that does not exist in the Justfile; actual recipes are `test-library` + `test-functions` — done in PR #8
 - `2026-10-01` cdp_backend/infrastructure/gcloud-functions/README.md debug command uses `--target hello_http` but the function is `generate_clip` — done in PR #8
