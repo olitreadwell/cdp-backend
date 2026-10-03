@@ -609,3 +609,35 @@ def test_convert_video_and_handle_host(
 
         assert mp4_filepath == str(Path(video_filepath).with_suffix(".mp4"))
         assert session_video_hosted_url == expected_hosted_video_url
+
+
+@mock.patch(f"{PIPELINE_PATH}.fs_functions.upload_file")
+@mock.patch(f"{PIPELINE_PATH}.file_utils.hash_file_contents")
+@mock.patch(f"{PIPELINE_PATH}.resource_exists")
+def test_convert_video_and_handle_host_uses_provided_uri_when_unverifiable(
+    mock_resource_exists: MagicMock,
+    mock_hash_file_contents: MagicMock,
+    mock_upload_file: MagicMock,
+) -> None:
+    # When neither the session video URI nor its "www" variant can be verified,
+    # the originally provided URI should be used. resource_exists issues a HEAD
+    # request, which some hosts reject or redirect, so an unverifiable URI does
+    # not mean that the URI (already resource copied via GET) is unusable.
+    mock_resource_exists.return_value = False
+    mock_hash_file_contents.return_value = "abc123"
+    session = deepcopy(EXAMPLE_MINIMAL_EVENT.sessions[0])
+
+    (
+        _,
+        session_video_hosted_url,
+        session_content_hash,
+    ) = pipeline.convert_video_and_handle_host.run(
+        video_filepath="example_video.mp4",
+        session=session,
+        credentials_file="fake/credentials.json",
+        bucket="doesnt://matter",
+    )
+
+    assert session_video_hosted_url == session.video_uri
+    assert session_content_hash == "abc123"
+    assert not mock_upload_file.called
