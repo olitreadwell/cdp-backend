@@ -141,7 +141,7 @@ def resource_exists(uri: str | None, **kwargs: Any) -> bool:  # noqa: C901
     Parameters
     ----------
     uri: Optional[str]
-        The URI to validate resource existance for.
+        The URI to validate resource existence for.
     kwargs: Any
         Any extra arguments needed for resource retrieval.
         I.e. google_credentials_file.

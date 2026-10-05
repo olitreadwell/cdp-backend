@@ -6,7 +6,7 @@ helps, and credit will always be given.
 ## Developer Installation
 
 If something goes wrong at any point during installing the library please see how
-[our CI/CD on GitHub Actions](.github/workflows/build-main.yml) installs and builds the
+[our CI/CD on GitHub Actions](.github/workflows/ci.yml) installs and builds the
 project as it will always be the most up-to-date.
 
 ## Get Started!
@@ -82,7 +82,8 @@ Available recipes:
     release                  # release a new version
     serve-docs               # generate Sphinx HTML documentation and serve to browser
     tag-for-release version  # tag a new version
-    test                     # run tests
+    test-functions           # run functions tests
+    test-library             # run library tests
     update-from-cookiecutter # update this repo using latest cookiecutter-py-package
 ```
 
