@@ -406,7 +406,7 @@ for i in range(6):
             )
         )
 
-    # Append rand event and proce results as tuple
+    # Append rand event and proc results as tuple
     # Set fail_file_uploads to even param sets
     RANDOM_EVENTS_AND_PROC_RESULTS.append((rand_event, proc_results, i % 2 == 0, False))
 

@@ -133,7 +133,7 @@ def create_event_index_upload_pipeline(
     ----------
     config: EventIndexPipelineConfig
         Configuration options for the pipeline.
-    index_chunk: int
+    index_chunk: Union[str, Path]
         Path to the index chunk file to process.
     upload_batch_size: int
         Number of ngrams to upload to database in a single batch.

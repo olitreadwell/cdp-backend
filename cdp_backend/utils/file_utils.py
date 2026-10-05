@@ -275,7 +275,7 @@ def youtube_copy(uri: str, dst: Path, overwrite: bool = False) -> str:
     ----------
     uri: str
         The url of the YouTube video to copy.
-    dst: str
+    dst: Path
         The location of the file to download.
     overwrite: bool
         Boolean value indicating whether or not to overwrite a local video with
@@ -308,7 +308,7 @@ def vimeo_copy(uri: str, dst: Path, overwrite: bool = False) -> str:
     ----------
     uri: str
         The url of the Vimeo video to copy.
-    dst: str
+    dst: Path
         The location of the file to download.
     overwrite: bool
         Boolean value indicating whether or not to overwrite a local video with
@@ -365,7 +365,7 @@ def split_audio(
         Path to where the split audio file was saved.
     ffmpeg_stdout_path: str
         Path to the ffmpeg stdout log file.
-    ffmpeg stderr path: str
+    ffmpeg_stderr_path: str
         Path to the ffmpeg stderr log file.
     """
     import ffmpeg
@@ -609,7 +609,7 @@ def convert_video_to_mp4(
 
     Parameters
     ----------
-    video_filepath: str
+    video_filepath: Path
         The filepath of the video to convert.
     start_time: str
         The start time to trim the video in HH:MM:SS.
