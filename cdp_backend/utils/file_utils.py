@@ -1,4 +1,4 @@
-##!/usr/bin/env python
+#!/usr/bin/env python
 
 from __future__ import annotations
 
@@ -433,7 +433,7 @@ def get_static_thumbnail(
 
     Returns
     -------
-    str: cover_name
+    cover_name: str
         The name of the thumbnail file:
         Always session_content_hash + "-static-thumbnail.png"
     """
@@ -491,9 +491,9 @@ def get_hover_thumbnail(
 
     Returns
     -------
-    str: cover_name
+    cover_name: str
         The name of the thumbnail file:
-        Always session_content_hash + "-hover-thumbnail.png"
+        Always session_content_hash + "-hover-thumbnail.gif"
     """
     import imageio
     import numpy as np
@@ -620,7 +620,7 @@ def convert_video_to_mp4(
 
     Returns
     -------
-    output_path: str
+    output_path: Path
         The filepath of the converted MP4 video.
     """
     output_path = output_path or video_filepath.with_suffix(".mp4")
