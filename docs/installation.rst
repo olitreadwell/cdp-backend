@@ -26,13 +26,13 @@ you through the process.
 From sources
 ------------
 
-The sources for cdp-backend can be downloaded from the `Github repo`_.
+The sources for cdp-backend can be downloaded from the `GitHub repo`_.
 
 You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/CouncilDataProject/cdp-backend
+    $ git clone https://github.com/CouncilDataProject/cdp-backend
 
 Or download the `tarball`_:
 
@@ -47,5 +47,5 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/CouncilDataProject/cdp-backend
+.. _GitHub repo: https://github.com/CouncilDataProject/cdp-backend
 .. _tarball: https://github.com/CouncilDataProject/cdp-backend/tarball/main

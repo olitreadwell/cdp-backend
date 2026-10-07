@@ -81,7 +81,7 @@ project = "cdp-backend"
 copyright = "2023"
 author = "Eva Maxfield Brown, To Huynh, Isaac Na, Council Data Project Contributors"
 
-# The version info for the project you"re documenting, acts as replacement
+# The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
 # the built documents.
 #

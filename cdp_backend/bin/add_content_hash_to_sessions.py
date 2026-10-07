@@ -78,7 +78,7 @@ def add_content_hash_to_sessions(google_creds_path: Path) -> None:
             # on a property during any db write action
             session.event_ref = session.event_ref.get()
 
-            # Give GCSFilSystem permissions to read GCS resources
+            # Give GCSFileSystem permissions to read GCS resources
             session.set_validator_kwargs(
                 kwargs={"google_credentials_file": str(google_creds_path)}
             )
