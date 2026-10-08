@@ -19,7 +19,7 @@ event gather pipeline takes into three short and easy to remember key points.
    transcripts.
 
 These key points make sense from the thousand-foot-view, but is not
-satifactory for the developers and others who are simply interested in
+satisfactory for the developers and others who are simply interested in
 how the event gather pipeline works step-by-step.
 
 This document gives visualizations of each and every step the event gather

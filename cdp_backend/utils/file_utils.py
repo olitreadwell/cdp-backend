@@ -1,4 +1,4 @@
-##!/usr/bin/env python
+#!/usr/bin/env python
 
 from __future__ import annotations
 
@@ -275,7 +275,7 @@ def youtube_copy(uri: str, dst: Path, overwrite: bool = False) -> str:
     ----------
     uri: str
         The url of the YouTube video to copy.
-    dst: str
+    dst: Path
         The location of the file to download.
     overwrite: bool
         Boolean value indicating whether or not to overwrite a local video with
@@ -308,7 +308,7 @@ def vimeo_copy(uri: str, dst: Path, overwrite: bool = False) -> str:
     ----------
     uri: str
         The url of the Vimeo video to copy.
-    dst: str
+    dst: Path
         The location of the file to download.
     overwrite: bool
         Boolean value indicating whether or not to overwrite a local video with
@@ -365,7 +365,7 @@ def split_audio(
         Path to where the split audio file was saved.
     ffmpeg_stdout_path: str
         Path to the ffmpeg stdout log file.
-    ffmpeg stderr path: str
+    ffmpeg_stderr_path: str
         Path to the ffmpeg stderr log file.
     """
     import ffmpeg
@@ -433,7 +433,7 @@ def get_static_thumbnail(
 
     Returns
     -------
-    str: cover_name
+    cover_name: str
         The name of the thumbnail file:
         Always session_content_hash + "-static-thumbnail.png"
     """
@@ -491,9 +491,9 @@ def get_hover_thumbnail(
 
     Returns
     -------
-    str: cover_name
+    cover_name: str
         The name of the thumbnail file:
-        Always session_content_hash + "-hover-thumbnail.png"
+        Always session_content_hash + "-hover-thumbnail.gif"
     """
     import imageio
     import numpy as np
@@ -609,7 +609,7 @@ def convert_video_to_mp4(
 
     Parameters
     ----------
-    video_filepath: str
+    video_filepath: Path
         The filepath of the video to convert.
     start_time: str
         The start time to trim the video in HH:MM:SS.
@@ -620,7 +620,7 @@ def convert_video_to_mp4(
 
     Returns
     -------
-    output_path: str
+    output_path: Path
         The filepath of the converted MP4 video.
     """
     output_path = output_path or video_filepath.with_suffix(".mp4")
@@ -671,7 +671,7 @@ def download_video_from_session_id(
         The path to the Google Service Account credentials JSON file used
         to initialize the file store connection.
     session_id: str
-        The id of the session to retrive the video for.
+        The id of the session to retrieve the video for.
     dest: Optional[Union[str, Path]]
         A destination to store the file to.
         This is passed directly to the resource_copy function.
@@ -764,7 +764,7 @@ def clip_and_reformat_video(
 
 def parse_document(document_uri: str) -> str:
     """
-    Extract text from a .doc, .docx, or .ppt matter file.
+    Extract text from a .doc, .docx, or .pptx matter file.
 
     Parameters
     ----------
@@ -888,7 +888,7 @@ def parse_pdf_file(document_raw: bytes) -> str:
 
 def parse_pptx_file(document_raw: bytes) -> str:
     """
-    Extract text from a .pdf matter file.
+    Extract text from a .pptx matter file.
 
     Parameters
     ----------
@@ -898,7 +898,7 @@ def parse_pptx_file(document_raw: bytes) -> str:
     Returns
     -------
     str:
-        A str of all text in the .pdf file.
+        A str of all text in the .pptx file.
     """
     from tika import parser
 
