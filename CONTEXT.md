@@ -1,5 +1,5 @@
 # CouncilDataProject/cdp-backend context
-> refreshed 2026-10-07 | upstream default: main @ fda26250d66a076a05772dda2f9a109d34ac6a03
+> refreshed 2026-10-09 | upstream default: main @ fda26250d66a076a05772dda2f9a109d34ac6a03
 
 ## Identity & policies
 - upstream: CouncilDataProject/cdp-backend, default branch main, primary language Python, English-first: yes (all docs in English)
@@ -44,6 +44,8 @@ one bullet per attempt:
 
 - `2026-10-07` self-found trivial-errors cleanup, pass 7 (5 fixes, 5 files: `README.md` license line `**MIT License**` -> `**MPL-2.0**` and `pyproject.toml` `license = { text = "MIT License" }` -> `MPL-2.0` + classifier `License :: OSI Approved :: MIT License` -> `... :: Mozilla Public License 2.0 (MPL 2.0)` (the project relicensed in `LICENSE`, commit `0f849fae` "Switch to MPLv2", which only touched LICENSE, so the README and packaging metadata were left stale); `CONTRIBUTING.md` line 101 `github` -> `GitHub`; `docs/installation.rst` lines 29+50 `Github` -> `GitHub` (brand name; the repo writes "GitHub" elsewhere); `docs/conf.py` line 84 comment `you"re` -> `you're`) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/14 — docs/metadata only, no code paths changed; `git diff --check` clean, `py_compile docs/conf.py` clean, pyproject parses via tomllib, codespell + typos clean on the 5 changed files; fork CI red on main too (mypy/yaml-stubs py3.11, av wheel build). NOTE: typos/codespell/dead-link sweeps are now exhausted outside OPEN PR #11's 20 files/408 lines; PR #14 hunks are disjoint from #11 (README line 1-6 vs 67; CONTRIBUTING lines 6-10/82-88 vs 101; installation.rst lines 32-38 vs 29/50) so no textual conflict.
 
+- `2026-10-09` self-found trivial-errors cleanup, pass 8 (8 fixes, 3 files: `cdp_backend/infrastructure/gcloud-functions/README.md` H1 `Hello World Function` -> `Generate Clip Function` (stale cookiecutter placeholder; the dir only documents the `generate_clip` function); `cdp_backend/utils/file_utils.py` `parse_document` docstring `.ppt` -> `.pptx` (function branches only on `.docx`/`.doc`/`.pdf`/`.pptx`); `parse_pptx_file` summary + Returns `.pdf` -> `.pptx` (parses pptx via tika); `cdp_backend/pipeline/event_gather_pipeline.py` `use_speech_to_text_and_generate_transcript` + `generate_transcript` docstrings `the produce transcript` -> `the produced transcript`; and the `bucket` docstrings in `generate_transcript` (`produced audio` -> `produced transcript`, it uploads the transcript) and `generate_thumbnails` (`produced audio` -> `produced thumbnails`, it uploads the thumbnails)) — pr-opened https://github.com/olitreadwell/cdp-backend/pull/15 — docs/docstrings only, no code paths changed; `git diff --check` clean, `py_compile` clean, `import cdp_backend` OK, typos/codespell clean on the changed files (only pre-existing/claimed hits remain); fork CI red on main too (mypy/yaml-stubs py3.11, av wheel build). Hunks disjoint from OPEN #13/#14 (verified against live `gh pr diff`).
+
 ## Mined gaps (discovered, not yet attempted)
 one bullet per candidate:
 - `2026-09-08` CONTRIBUTING.md links to deleted `.github/workflows/build-main.yml` (removed in #201, 2022); current file is `.github/workflows/ci.yml` — stale/broken link
@@ -70,3 +72,4 @@ one bullet per candidate:
 - `2026-10-07` README.md `**MIT License**` + pyproject.toml license metadata (text + classifier) still said MIT after the `LICENSE` was switched to MPL-2.0 (commit `0f849fae`) — done in PR #14
 - `2026-10-07` CONTRIBUTING.md line 101 lowercase brand `github workflow`; docs/installation.rst lines 29/50 `Github repo` (brand misspelling; repo uses `GitHub`) — done in PR #14
 - `2026-10-07` docs/conf.py line 84 comment stray quote `you"re` -> `you're` — done in PR #14
+- `2026-10-09` gcloud-functions README H1 stale `Hello World Function`; file_utils parse_document `.ppt`; parse_pptx_file `.pdf` (summary+Returns); event_gather `the produce transcript` x2, `produced audio` bucket docstrings in generate_transcript/generate_thumbnails — done in PR #15
