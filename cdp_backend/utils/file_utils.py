@@ -12,6 +12,7 @@ import xml.dom.minidom
 import zipfile
 from hashlib import sha256
 from pathlib import Path
+from urllib.parse import urlparse
 from uuid import uuid4
 
 import fireo
@@ -130,9 +131,14 @@ def get_media_type(uri: str) -> str | None:
         str(Path(__file__).parent / "resources" / "content-types-*.csv")
     )
 
-    # Get suffix from URI
-    splits = uri.split(".")
-    suffix = splits[-1]
+    # Isolate the URI path so that query strings and fragments
+    # (e.g. "https://some.site.co/report.pdf?version=2") don't corrupt the
+    # file extension
+    path = urlparse(uri).path
+
+    # Get suffix from URI, lowercased as file extensions are case insensitive
+    # (e.g. "https://some.site.co/IMAGE.PNG")
+    suffix = Path(path).suffix.lstrip(".").lower()
 
     # Find content type
     matching = media_types[media_types["Name"] == suffix].compute()
@@ -143,6 +149,11 @@ def get_media_type(uri: str) -> str | None:
 
     # Otherwise, return none
     return None
+
+
+def _uri_derived_filename(uri: str) -> str:
+    """Get the last path segment of a uri without its query string or fragment."""
+    return uri.split("/")[-1].split("?")[0].split("#")[0]
 
 
 def resource_copy(  # noqa: C901
@@ -175,7 +186,7 @@ def resource_copy(  # noqa: C901
     """
     uri_suffix = Path(uri.split("/")[-1].split("?")[0].split("#")[0]).suffix
     if dst is None:
-        dst = uri.split("/")[-1]
+        dst = _uri_derived_filename(uri)
 
     # Ensure dst doesn't exist
     dst = Path(dst).resolve()
@@ -184,8 +195,8 @@ def resource_copy(  # noqa: C901
             # Split by youtube video query parameter
             dst = dst / uri.split("v=")[-1]
         else:
-            # Split by the last "/"
-            dst = dst / uri.split("/")[-1]
+            # Split by the last "/" and strip any query string or fragment
+            dst = dst / _uri_derived_filename(uri)
 
     if copy_suffix:
         dst = dst.with_suffix(uri_suffix)
