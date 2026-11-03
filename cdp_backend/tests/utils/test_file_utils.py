@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import io
 import os
 import random
 import sys
@@ -99,12 +100,23 @@ def test_rename_append_to_stem(path: Path, addition: str, expected_result: str) 
         ("https://some.site.co/image.png", "image/png"),
         ("https://some.site.co/image.tiff", "image/tiff"),
         ("https://some.site.co/report.pdf", "application/pdf"),
+        (
+            "https://some.site.co/report.pdf?version=2&token=abc",
+            "application/pdf",
+        ),
+        ("https://some.site.co/IMAGE.PNG", "image/png"),
+        ("https://some.site.co/image.png#page=3", "image/png"),
         ("https://some.site.co/image.unknownformat", None),
         ("file:///some/dir/index.html", "text/html"),
         ("file:///some/dir/data.json", "application/json"),
+        ("file:///some/dir/data.json?alt=media", "application/json"),
         ("file:///some/dir/image.png", "image/png"),
         ("file:///some/dir/image.tiff", "image/tiff"),
         ("file:///some/dir/report.pdf", "application/pdf"),
+        (
+            "gs://cdp-example/central-staff-memo.pdf?alt=media",
+            "application/pdf",
+        ),
         ("file:///some/dir/image.unknownformat", None),
     ],
 )
@@ -130,6 +142,65 @@ def test_resource_copy_https(tmpdir, example_video: Path) -> None:  # type: igno
         )
         assert saved_path == dest
         example_video_file.close()
+
+
+@pytest.mark.parametrize(
+    "uri, expected_filename",
+    [
+        ("https://example.com/example_video.mp4", "example_video.mp4"),
+        (
+            "https://example.com/example_video.mp4?alt=media",
+            "example_video.mp4",
+        ),
+        (
+            "https://example.com/example_video.mp4?token=abc&download=1",
+            "example_video.mp4",
+        ),
+        (
+            "https://example.com/example_video.mp4#fragment",
+            "example_video.mp4",
+        ),
+    ],
+)
+def test_resource_copy_default_dst_strips_query_string(  # type: ignore
+    tmpdir,
+    uri: str,
+    expected_filename: str,
+) -> None:
+    # Mock a streaming response so no network access is required
+    class MockResponse:
+        def __init__(self, content: bytes) -> None:
+            self.raw = io.BytesIO(content)
+            self.status_code = 200
+
+        def raise_for_status(self) -> None:
+            return None
+
+        def close(self) -> None:
+            return None
+
+    def mock_get(*args, **kwargs):  # type: ignore
+        return MockResponse(b"example content")
+
+    cwd = Path.cwd()
+    dest_dir = Path(tmpdir)
+    with mock.patch(
+        "cdp_backend.utils.file_utils.requests.get",
+        side_effect=mock_get,
+    ):
+        try:
+            # Copy to a directory so the filename is derived from the url
+            saved_path = resource_copy(uri, dest_dir)
+            assert saved_path == str(dest_dir / expected_filename)
+
+            # Copy without a destination so the filename is derived from the url
+            no_dst_dir = dest_dir / "no-dst"
+            no_dst_dir.mkdir()
+            os.chdir(no_dst_dir)
+            saved_path_no_dst = resource_copy(uri)
+            assert Path(saved_path_no_dst).name == expected_filename
+        finally:
+            os.chdir(cwd)
 
 
 # Type ignore because changing tmpdir typing
