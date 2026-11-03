@@ -136,7 +136,7 @@ class Session(IngestionModel, DataClassJsonMixin):
     -----
     video_start_time is a duration relative to the beginning of the video in
     HH:MM:SS format. It does not affect nor is relative to session_datetime
-    or any other datetime. If the portion of the video relavent to the session
+    or any other datetime. If the portion of the video relevant to the session
     begins 37m50s into the full video, video_start_time will be "37:50".
     An absent start time is equivalent to the beginning of the video, and an
     absent end time is equivalent to the end of the video, so either can be omitted.

@@ -98,13 +98,13 @@ class Word(DataClassJsonMixin):
     Parameters
     ----------
     index: int
-        The index of the word in it's respective sentence.
+        The index of the word in its respective sentence.
     start_time: float
         Time in seconds for when this word begins.
     end_time: float
         Time in seconds for when this word ends.
     text: str
-        The raw text of the word, lowercased and cleaned of all non-deliminating chars.
+        The raw text of the word, lowercased and cleaned of all non-delimiting chars.
     annotations: Optional[WordAnnotations]
         Any annotations specific to this word.
         Default: None (no annotations)
@@ -125,7 +125,7 @@ class Sentence(DataClassJsonMixin):
     Parameters
     ----------
     index: int
-        The index of the sentence in it's respective transcript.
+        The index of the sentence in its respective transcript.
     confidence: float
         A number between 0 and 1 for the confidence of the sentence accuracy.
     start_time: float
@@ -140,9 +140,9 @@ class Sentence(DataClassJsonMixin):
         Any annotations specific to this sentence.
         Default: None (no annotations)
     words: List[Word]
-        The list of word for the sentence.
+        The list of words for the sentence.
     text: str
-        The text of the sentence including all formatting and non-deliminating chars.
+        The text of the sentence including all formatting and non-delimiting chars.
     """
 
     index: int

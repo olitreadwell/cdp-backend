@@ -169,7 +169,7 @@ def remove_local_file(filepath: str | Path) -> None:
 
     Parameters
     ----------
-    filepath: str
+    filepath: str | Path
         The filepath of the local file to delete.
     """
     fs = LocalFileSystem()

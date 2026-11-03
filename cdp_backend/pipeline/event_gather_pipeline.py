@@ -326,8 +326,6 @@ def convert_video_and_handle_host(  # noqa: C901
 
     Parameters
     ----------
-    session_content_hash: str
-        The content hash to use as the filename for the video once uploaded.
     video_filepath: Union[str, Path]
         The local path for video file to convert.
     session: Session
@@ -391,7 +389,7 @@ def convert_video_and_handle_host(  # noqa: C901
         video_filepath = str(trimmed_filepath)
 
     # Check if original session video uri is a m3u8
-    # We cant follow the normal coonvert video process from above
+    # We can't follow the normal convert video process from above
     # because the m3u8 looks to the URI for all the chunks
     elif session.video_uri.endswith(".m3u8"):
         cdp_will_host = True
@@ -546,7 +544,7 @@ def use_speech_to_text_and_generate_transcript(
     model_name: str
         The whisper model to use for transcription.
     confidence: Optional[float]
-        The confidence to set the produce transcript to.
+        The confidence to set the produced transcript to.
 
     Returns
     -------
@@ -690,13 +688,13 @@ def generate_transcript(
         The specific session details to be used in final transcript upload and
         archival.
     bucket: str
-        The name of the GCS bucket to upload the produced audio to.
+        The name of the GCS bucket to upload the produced transcript to.
     credentials_file: str
         Path to the GCS JSON credentials file.
     whisper_model_name: str
         The whisper model to use for transcription.
     whisper_model_confidence: Optional[float]
-        The confidence to set the produce transcript to.
+        The confidence to set the produced transcript to.
 
     Returns
     -------
@@ -778,7 +776,7 @@ def generate_thumbnails(
     event: EventIngestionModel
         The parent event of the session.
     bucket: str
-        The name of the GCS bucket to upload the produced audio to.
+        The name of the GCS bucket to upload the produced thumbnails to.
     credentials_file: str
         Path to Google Service Account Credentials JSON file.
 

@@ -78,7 +78,7 @@ jobs:
     - name: Upload Codecov
       uses: codecov/codecov-action@v3
 
-  # Check linting, formating, types, etc.
+  # Check linting, formatting, types, etc.
   lint:
     runs-on: ubuntu-latest
 

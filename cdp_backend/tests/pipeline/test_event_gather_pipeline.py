@@ -36,7 +36,7 @@ from ..conftest import EXAMPLE_M3U8_PLAYLIST_URI
 #############################################################################
 
 # NOTE:
-# unittest mock patches are accesible in reverse order in params
+# unittest mock patches are accessible in reverse order in params
 # i.e. if we did the following patches
 # @patch(module.func_a)
 # @patch(module.func_b)
@@ -230,7 +230,7 @@ passed_events_minutes_item = ingestion_models.EventMinutesItem(
     "vote, event_minutes_item, expected",
     [
         # The minutes item passed
-        # They approved or approved-by-abstention-or-absense
+        # They approved or approved-by-abstention-or-absence
         (
             ingestion_models.Vote(
                 person=example_person,
@@ -255,7 +255,7 @@ passed_events_minutes_item = ingestion_models.EventMinutesItem(
             passed_events_minutes_item,
             True,
         ),
-        # They rejected or rejected-by-abstention-or-absense
+        # They rejected or rejected-by-abstention-or-absence
         (
             ingestion_models.Vote(
                 person=example_person,
@@ -281,7 +281,7 @@ passed_events_minutes_item = ingestion_models.EventMinutesItem(
             False,
         ),
         # The minutes item failed
-        # They approved or approved-by-abstention-or-absense
+        # They approved or approved-by-abstention-or-absence
         (
             ingestion_models.Vote(
                 person=example_person,
@@ -306,7 +306,7 @@ passed_events_minutes_item = ingestion_models.EventMinutesItem(
             failed_events_minutes_item,
             False,
         ),
-        # They rejected or rejected-by-abstention-or-absense
+        # They rejected or rejected-by-abstention-or-absence
         (
             ingestion_models.Vote(
                 person=example_person,
@@ -385,7 +385,7 @@ def test_calculate_in_majority(
 # Database storage tests prep
 
 # Generate random events and construct session processing results for each
-# While we can't guarentee this will cover all cases,
+# While we can't guarantee this will cover all cases,
 # this should cover most cases.
 
 RANDOM_EVENTS_AND_PROC_RESULTS = []
@@ -406,7 +406,7 @@ for i in range(6):
             )
         )
 
-    # Append rand event and proce results as tuple
+    # Append rand event and proc results as tuple
     # Set fail_file_uploads to even param sets
     RANDOM_EVENTS_AND_PROC_RESULTS.append((rand_event, proc_results, i % 2 == 0, False))
 

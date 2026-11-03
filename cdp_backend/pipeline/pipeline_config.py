@@ -75,7 +75,7 @@ class EventGatherPipelineConfig(DataClassJsonMixin):
 
             except FileNotFoundError as e:
                 raise ValueError(
-                    f"Provided or infered GCS bucket name does not exist. ('{bucket}')"
+                    f"Provided or inferred GCS bucket name does not exist. ('{bucket}')"
                 ) from e
 
         return self._validated_gcs_bucket_name
@@ -139,7 +139,7 @@ class EventIndexPipelineConfig(DataClassJsonMixin):
 
             except FileNotFoundError as e:
                 raise ValueError(
-                    f"Provided or infered GCS bucket name does not exist. ('{bucket}')"
+                    f"Provided or inferred GCS bucket name does not exist. ('{bucket}')"
                 ) from e
 
         return self._validated_gcs_bucket_name
