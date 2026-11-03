@@ -349,6 +349,11 @@ def convert_video_and_handle_host(  # noqa: C901
     log.info(f"Original video uri: '{session.video_uri}'")
     log.info(f"Handling video conversion and hosting for video: '{video_filepath}'")
 
+    # Default to the URI provided on the session. It is replaced below only when a
+    # verifiably better host is found (a secure variant, a working www variant, or
+    # our own upload).
+    hosted_video_media_url = session.video_uri
+
     trim_video = bool(session.video_start_time or session.video_end_time)
 
     # Convert to mp4 if file isn't of approved web format
